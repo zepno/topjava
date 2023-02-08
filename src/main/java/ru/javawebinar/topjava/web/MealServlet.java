@@ -44,33 +44,34 @@ public class MealServlet extends HttpServlet {
                     request.getParameter("description"),
                     Integer.parseInt(request.getParameter("calories")));
         }
+        log.info(meal.isNew() ? "create{}" : "update{}", meal);
         repository.save(meal);
         response.sendRedirect("meals");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.info("meals");
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {
             case "delete":
                 int mealId = getId(request);
+                log.info("delete{}", mealId);
                 repository.delete(mealId);
                 response.sendRedirect("meals");
                 break;
             case "create":
-                Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES),
-                        "", 0);
-                request.setAttribute("mealTos", meal);
-                request.getRequestDispatcher("/editMeal.jsp").forward(request, response);
             case "update":
-                mealId = getId(request);
-                meal = repository.get(mealId);
-                request.setAttribute("mealTos", meal);
+                Meal meal = "create".equals(action) ?
+                        new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 0) :
+                        repository.get(getId(request));
+                request.setAttribute("meal", meal);
                 request.getRequestDispatcher("/editMeal.jsp").forward(request, response);
                 break;
             case "all":
             default:
+                log.info("get all");
                 request.setAttribute("mealTos", filteredByStreams(repository.getAll(), LocalTime.MIN,
                         LocalTime.MAX, CALORIES_PER_DAY));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);

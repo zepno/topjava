@@ -9,16 +9,14 @@
 <body>
 <h3><a href="index.html">Home</a></h3>
 <hr>
-<h2>${param.action == 'create' ? 'create meal' : 'edit meal'}</h2>
-<jsp:useBean id="mealTos" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
+<h2>${param.action == 'create' ? 'add meal' : 'edit meal'}</h2>
+<jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
 <form method="post" action="meals">
-    meal Id : <input type="hidden" name="id" value="${mealTos.id}">
-    date Time : <input type="datetime-local" name="dateTime" value="${mealTos.dateTime}">
-    description : <input type="text" name="description" value="${mealTos.description}">
-    calories : <input type="number" name="calories" value="${mealTos.calories}">
-    calories :
+    <input type="hidden" name="id" value="${meal.id}">
+    date Time : <input type="datetime-local" name="dateTime" value="${meal.dateTime}">
+    description : <input type="text" name="description" value="${meal.description}">
+    calories : <input type="number" name="calories" value="${meal.calories}">
     <button type="submit">Save</button>
-    calories :
     <button type="button" onclick="window.history.back()">Cancel</button>
 </form>
 </body>
