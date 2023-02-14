@@ -21,41 +21,26 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
-
-    <div class="card border-dark">
-        <div class="card-body pb-0">
-            <form id="filter">
-                <div class="row">
-                    <div class="col-2">
-                        <label for="startDate">От даты (включая)</label>
-                        <input class="form-control" name="startDate" id="startDate" autocomplete="off">
-                    </div>
-                    <div class="col-2">
-                        <label for="endDate">До даты (включая)</label>
-                        <input class="form-control" name="endDate" id="endDate" autocomplete="off">
-                    </div>
-                    <div class="offset-2 col-3">
-                        <label for="startTime">От времени (включая)</label>
-                        <input class="form-control" name="startTime" id="startTime" autocomplete="off">
-                    </div>
-                    <div class="col-3">
-                        <label for="endTime">До времени (исключая)</label>
-                        <input class="form-control" name="endTime" id="endTime" autocomplete="off">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="card-footer text-right">
-            <button class="btn btn-danger" onclick="clearFilter()">
-                <span class="fa fa-remove"></span>
-                Отменить
-            </button>
-            <button class="btn btn-primary" onclick="ctx.updateTable()">
-                <span class="fa fa-filter"></span>
-                Отфильтровать
-            </button>
-        </div>
-    </div>
+    <form method="get" action="meals">
+        <input type="hidden" name="action" value="filter">
+        <dl>
+            <dt>From date</dt>
+            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
+        </dl>
+        <dl>
+            <dt>To date</dt>
+            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
+        </dl>
+        <dl>
+            <dt>From time</dt>
+            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
+        </dl>
+        <dl>
+            <dt>To time</dt>
+            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
+        </dl>
+        <button type="submit">Filter</button>
+    </form>
 
     <a href="meals?action=create">Add Meal</a>
     <br><br>
