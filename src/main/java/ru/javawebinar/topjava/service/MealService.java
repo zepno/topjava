@@ -40,7 +40,7 @@ public class MealService {
     }
 
     public List<Meal> getBetween(int userId, LocalDate startDate, LocalDate endDate) {
-        return checkNotFoundWithId(repository.getAllBetween(userId, startDate.atStartOfDay(),
+        return checkNotFoundWithId(repository.getAllBetweenAndFilter(userId, startDate.atStartOfDay(),
                 endDate.atStartOfDay().plus(1, ChronoUnit.DAYS)), userId);
     }
 }
