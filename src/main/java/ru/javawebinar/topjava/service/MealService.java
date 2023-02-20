@@ -5,7 +5,6 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
@@ -40,7 +39,8 @@ public class MealService {
     }
 
     public List<Meal> getBetween(int userId, LocalDate startDate, LocalDate endDate) {
-        return checkNotFoundWithId(repository.getAllBetweenAndFilter(userId, startDate.atStartOfDay(),
-                endDate.atStartOfDay().plus(1, ChronoUnit.DAYS)), userId);
+        return checkNotFoundWithId(repository.getAllBetweenAndFilter(userId,
+                startDate.atStartOfDay(),
+                endDate.atStartOfDay().plusDays(1)), userId);
     }
 }
