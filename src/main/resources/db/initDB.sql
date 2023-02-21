@@ -17,7 +17,7 @@ CREATE TABLE users
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 
-CREATE TABLE user_role
+CREATE TABLE user_roles
 (
     user_id INTEGER NOT NULL,
     role    VARCHAR NOT NULL,
