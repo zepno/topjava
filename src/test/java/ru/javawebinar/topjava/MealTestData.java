@@ -29,7 +29,7 @@ public class MealTestData {
     public static final List<Meal> meals = Arrays.asList(meal7, meal6, meal5, meal4, meal3, meal2, meal1);
 
     public static Meal getNew() {
-        return new Meal(null, LocalDateTime.now(), "description", 1000);
+        return new Meal(null, of(2022, Month.FEBRUARY, 22, 17, 0), "description", 1000);
     }
 
     public static Meal getUpdated() {

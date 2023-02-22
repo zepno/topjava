@@ -35,19 +35,19 @@ public class MealServiceTest {
     private MealService service;
 
     @Test
-    public void testGet() {
+    public void get() {
         Meal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
         assertMatch(actual, adminMeal1);
     }
 
     @Test
-    public void testDelete() {
+    public void delete() {
         service.delete(MEAL1_ID, USER_ID);
         assertThrows(NotFoundException.class, () -> service.get(MEAL1_ID, USER_ID));
     }
 
     @Test
-    public void testGetBetweenInclusive() {
+    public void getBetweenInclusive() {
         assertMatch(service.getBetweenInclusive(
                 of(2020, Month.JANUARY, 30),
                 of(2020, Month.JANUARY, 30), USER_ID),
@@ -55,19 +55,19 @@ public class MealServiceTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void getAll() {
         assertMatch(service.getAll(USER_ID), meals);
     }
 
     @Test
-    public void testUpdate() {
+    public void update() {
         Meal updated = getUpdated();
         service.update(updated, USER_ID);
         assertMatch(service.get(MEAL1_ID, USER_ID), getUpdated());
     }
 
     @Test
-    public void testCreate() {
+    public void create() {
         Meal created = service.create(getNew(), USER_ID);
         Integer newId = created.getId();
         Meal newMeal = getNew();
