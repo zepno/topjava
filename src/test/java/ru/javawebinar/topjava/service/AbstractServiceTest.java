@@ -5,6 +5,9 @@ import org.junit.Rule;
 import org.junit.rules.ExternalResource;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -25,6 +28,9 @@ import static ru.javawebinar.topjava.util.ValidationUtil.getRootCause;
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 public abstract class AbstractServiceTest {
 
+    @Autowired
+    private Environment environment;
+
     @ClassRule
     public static ExternalResource summary = TimingRules.SUMMARY;
 
@@ -40,5 +46,9 @@ public abstract class AbstractServiceTest {
                 throw getRootCause(e);
             }
         });
+    }
+
+    public boolean isJpaProfile() {
+        return environment.acceptsProfiles(Profiles.of(ru.javawebinar.topjava.Profiles.JPA, ru.javawebinar.topjava.Profiles.DATAJPA));
     }
 }
