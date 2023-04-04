@@ -1,4 +1,4 @@
-﻿const userAjaxUrl = "admin/users/";
+const userAjaxUrl = "admin/users/";
 
 // https://stackoverflow.com/a/5064235/548473
 const ctx = {
